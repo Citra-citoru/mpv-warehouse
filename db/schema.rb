@@ -10,13 +10,51 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_29_210611) do
+ActiveRecord::Schema.define(version: 2023_09_19_084809) do
 
   create_table "groups", force: :cascade do |t|
     t.string "name"
     t.integer "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "ins", force: :cascade do |t|
+    t.integer "kind"
+    t.date "date"
+    t.string "number"
+    t.integer "document"
+    t.float "quantity"
+    t.float "price_unit"
+    t.float "price_total"
+    t.text "notes"
+    t.integer "stock_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["stock_id"], name: "index_ins_on_stock_id"
+  end
+
+  create_table "stocks", force: :cascade do |t|
+    t.integer "kind"
+    t.string "description"
+    t.string "code"
+    t.string "string"
+    t.string "unit"
+    t.string "penshable"
+    t.string "boolean"
+    t.float "minimum_stock"
+    t.float "maximum_stock"
+    t.float "reorder_point"
+    t.float "stock_balance"
+    t.float "average_cost"
+    t.float "total_cost"
+    t.string "account"
+    t.string "location"
+    t.integer "status"
+    t.integer "group_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["group_id"], name: "index_stocks_on_group_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -27,4 +65,6 @@ ActiveRecord::Schema.define(version: 2022_10_29_210611) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "ins", "stocks"
+  add_foreign_key "stocks", "groups"
 end
