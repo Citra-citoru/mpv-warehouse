@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_09_19_084809) do
+ActiveRecord::Schema.define(version: 2023_09_20_065917) do
 
   create_table "groups", force: :cascade do |t|
     t.string "name"
@@ -32,6 +32,21 @@ ActiveRecord::Schema.define(version: 2023_09_19_084809) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["stock_id"], name: "index_ins_on_stock_id"
+  end
+
+  create_table "requisitions", force: :cascade do |t|
+    t.integer "kind"
+    t.date "date"
+    t.string "number"
+    t.integer "department"
+    t.decimal "quantity"
+    t.decimal "average_cost"
+    t.decimal "total_cost"
+    t.text "notes"
+    t.integer "stock_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["stock_id"], name: "index_requisitions_on_stock_id"
   end
 
   create_table "stocks", force: :cascade do |t|
@@ -66,5 +81,6 @@ ActiveRecord::Schema.define(version: 2023_09_19_084809) do
   end
 
   add_foreign_key "ins", "stocks"
+  add_foreign_key "requisitions", "stocks"
   add_foreign_key "stocks", "groups"
 end
