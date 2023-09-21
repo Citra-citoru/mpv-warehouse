@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2023_09_20_065917) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "groups", force: :cascade do |t|
     t.string "name"
     t.integer "status"
@@ -28,7 +31,7 @@ ActiveRecord::Schema.define(version: 2023_09_20_065917) do
     t.float "price_unit"
     t.float "price_total"
     t.text "notes"
-    t.integer "stock_id", null: false
+    t.bigint "stock_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["stock_id"], name: "index_ins_on_stock_id"
@@ -43,7 +46,7 @@ ActiveRecord::Schema.define(version: 2023_09_20_065917) do
     t.decimal "average_cost"
     t.decimal "total_cost"
     t.text "notes"
-    t.integer "stock_id", null: false
+    t.bigint "stock_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["stock_id"], name: "index_requisitions_on_stock_id"
@@ -66,7 +69,7 @@ ActiveRecord::Schema.define(version: 2023_09_20_065917) do
     t.string "account"
     t.string "location"
     t.integer "status"
-    t.integer "group_id", null: false
+    t.bigint "group_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["group_id"], name: "index_stocks_on_group_id"
