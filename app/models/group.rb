@@ -3,7 +3,7 @@ class Group < ApplicationRecord
 
   validates :name, :status, presence: true
 
-  enum status: string_enum("active", "inactive")
+  enum status: ["active", "inactive"]
 
   def to_s
     "#{name}"
