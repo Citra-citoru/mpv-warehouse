@@ -36,6 +36,20 @@
     +stock Stock
   }
 
+  class Requisitions{   
+     +kind integer    
+     +date date    
+     +number string    
+     +department integer    
+     +quantity decimal    
+     +average_cost decimal    
+     +total_cost decimal    
+     +notes text    
+     +stock Stock  
+     +created_at datetime    
+     +updated_at datetime    
+  }
+
   class User {
     +name string
     +profile integer
@@ -44,5 +58,5 @@
 
   Group <|-- Stock
   Stock <|-- In
-   
+  Stock <|-- Requisitions
 ```
